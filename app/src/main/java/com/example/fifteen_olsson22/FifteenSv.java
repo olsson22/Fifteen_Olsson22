@@ -75,13 +75,13 @@ public class FifteenSv extends SurfaceView implements View.OnTouchListener
 					int yMax = sqrs[i][j].getY()+sqrs[i][j].getSide();
 					if(xPressed> xMin && xPressed<xMax && yPressed>yMin && yPressed<yMax ){
 
-						left = sqrs[i][j-1].getValue();
 
-						top = sqrs[i-1][j].getValue();
 
-						right = sqrs[i][j+1].getValue();
+							left = sqrs[i][j - 1].getValue();
+							top = sqrs[i-1][j].getValue();
+							right = sqrs[i][j + 1].getValue();
+							bottom = sqrs[i + 1][j].getValue();
 
-						bottom = sqrs[i+1][j].getValue();
 						if(left==0){
 							int temp = sqrs[i][j].getValue();
 							sqrs[i][j].setValue(0);
