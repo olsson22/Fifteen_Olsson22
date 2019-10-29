@@ -36,7 +36,7 @@ public class Grid {
 
 			}
 		}
-		//shuffle();
+		shuffle();
 	}
 
 	public Square[][] getSquares(){
