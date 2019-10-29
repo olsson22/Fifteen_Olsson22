@@ -2,6 +2,7 @@ package com.example.fifteen_olsson22;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity
@@ -16,6 +17,8 @@ public class MainActivity extends AppCompatActivity
 		FifteenSv theSv = findViewById(R.id.fifteenSv);
 
 		theSv.setOnTouchListener(theSv);
+
+
 
 
 
