@@ -44,14 +44,6 @@ public class MainActivity extends AppCompatActivity
 		dimensionBar.setOnSeekBarChangeListener(theSv);
 
 
-
-
-
-
-
-
-
-
 	}
 
 

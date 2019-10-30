@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
@@ -42,10 +41,7 @@ public class FifteenSv extends SurfaceView implements View.OnTouchListener,
 	 */
 	public FifteenSv(Context context, AttributeSet attrs) {
 		super(context, attrs);
-
 		setGridSize(gridSize);
-		//aGrid = new Grid(600,10, gridSize);
-		//squares = aGrid.getSquares();
 		setWillNotDraw(false);
 	}
 
@@ -148,6 +144,10 @@ public class FifteenSv extends SurfaceView implements View.OnTouchListener,
 		int bottom;
 		int[] coordList = new int[4];
 
+		//these if-statements make sure that the program does not call
+		//any positions in the grid that are bigger or smaller than the actual indexes
+		//i.e. these if statements makes sure there are no array-out-of-bounds exceptions.
+
 		if (row - 1 < 0 && col - 1 < 0) {
 			left = -1;
 			top = -1;
@@ -242,7 +242,6 @@ public class FifteenSv extends SurfaceView implements View.OnTouchListener,
 		if(event.getActionMasked()==MotionEvent.ACTION_DOWN){
 			float xPressed = event.getX();
 			float yPressed = event.getY();
-			Log.d("pressed","it was pressed at x: "+ xPressed + " y: " + yPressed);
 
 			for(int i=0;i<aGrid.getSize();i++){
 				for(int j = 0; j<aGrid.getSize();j++){
