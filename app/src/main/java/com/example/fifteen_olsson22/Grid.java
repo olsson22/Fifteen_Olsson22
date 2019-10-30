@@ -1,9 +1,14 @@
 package com.example.fifteen_olsson22;
 
-import java.util.ArrayList;
-import java.util.Collections;
+
 import java.util.Random;
 
+
+/**
+ * @Author Fredrik Olsson
+ *
+ * This class creates a grid of squares, to represent the game of Fifteen
+ */
 public class Grid {
 
 
@@ -13,12 +18,17 @@ public class Grid {
 	private Square[][] squares;
 
 
-
+	/**
+	 * Creates a grid at a given x and x coordinate with a given size
+	 * @param x the x coordinate of the grid
+	 * @param y the y coordinate of the grid
+	 * @param size the size of the grid
+	 */
 	public Grid(int x, int y, int size){
 		this.x=x;
 		this.y=y;
 		this.size=size;
-		int side = 120;
+		int side = 100;
 		int counter = 0;
 		squares = new Square[size][size];
 		for(int i = 0; i<size;i++){
@@ -36,17 +46,29 @@ public class Grid {
 
 			}
 		}
+		//Comment below line to test the "finished game"-function
 		shuffle();
 	}
 
+	/**
+	 * returns the grid.
+	 * @return the grid
+	 */
 	public Square[][] getSquares(){
 		return squares;
 	}
+
+	/**
+	 * returns the size of the grid
+	 * @return the size of the grid
+	 */
 	public int getSize(){
 		return size;
 	}
 
-
+	/**
+	 * Randomizes the values on the grid
+	 */
 	public void shuffle(){
 
 		int n = getSize()-1;
@@ -63,6 +85,4 @@ public class Grid {
 			}
 		}
 	}
-
-
 }
