@@ -21,23 +21,30 @@ public class FifteenSv extends SurfaceView implements View.OnTouchListener
 	protected Square[][] sqrs;
 	private Grid aGrid;
 	private Paint backGround = new Paint();
+	private int gridSize;
 
 	public FifteenSv(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		setWillNotDraw(false);
-		aGrid = new Grid(600,200, 4);
+		setGridSize(6);
+		aGrid = new Grid(600,10, gridSize);
 		sqrs = aGrid.getSquares();
 	}
 
+	public void setGridSize(int newSize){
+		gridSize = newSize;
+	}
+
 	public void onDraw(Canvas canvas){
+		sqrs = aGrid.getSquares();
 		backGround.setColor(Color.GREEN);
 		backGround.setTextSize(60);
 		if(checkIfFinished(sqrs,aGrid.getSize())==true){
 			canvas.drawText("YOU DID IT", 200,200,backGround);
 		}
 
-		for(int i = 0;i<4;i++) {
-			for (int j = 0; j < 4; j++)
+		for(int i = 0;i<aGrid.getSize();i++) {
+			for (int j = 0; j < aGrid.getSize(); j++)
 			{
 				paint.setColor(Color.RED);
 				canvas.drawRect(sqrs[i][j].getX(), sqrs[i][j].getY(), sqrs[i][j].getX() + sqrs[i][j].getSide(), sqrs[i][j].getY() + sqrs[i][j].getSide(), paint);
@@ -82,6 +89,76 @@ public class FifteenSv extends SurfaceView implements View.OnTouchListener
 			return false;
 	}
 
+	private int[] getCoordinates(int i, int j)
+	{
+		int left;
+		int top;
+		int right;
+		int bottom;
+		int[] coordList = new int[4];
+
+		if (i - 1 < 0 && j - 1 < 0)
+		{
+			left = -1;
+			top = -1;
+			right = sqrs[i][j + 1].getValue();
+			bottom = sqrs[i + 1][j].getValue();
+		} else if (i - 1 < 0 && j + 1 == aGrid.getSize())
+		{
+			left = sqrs[i][j - 1].getValue();
+			top = -1;
+			right = -1;
+			bottom = sqrs[i + 1][j].getValue();
+		} else if (i + 1 == aGrid.getSize() && j + 1 == aGrid.getSize())
+		{
+			left = sqrs[i][j - 1].getValue();
+			top = sqrs[i - 1][j].getValue();
+			right = -1;
+			bottom = -1;
+		} else if (i + 1 == aGrid.getSize() && j - 1 < 0)
+		{
+			left = -1;
+			top = sqrs[i - 1][j].getValue();
+			right = sqrs[i][j + 1].getValue();
+			bottom = -1;
+		} else if (i - 1 < 0)
+		{
+			left = sqrs[i][j - 1].getValue();
+			top = -1;
+			right = sqrs[i][j + 1].getValue();
+			bottom = sqrs[i + 1][j].getValue();
+		} else if (j - 1 < 0)
+		{
+			left = -1;
+			top = sqrs[i - 1][j].getValue();
+			right = sqrs[i][j + 1].getValue();
+			bottom = sqrs[i + 1][j].getValue();
+		} else if (i + 1 == aGrid.getSize())
+		{
+			left = sqrs[i][j - 1].getValue();
+			top = sqrs[i - 1][j].getValue();
+			right = sqrs[i][j + 1].getValue();
+			bottom = -1;
+		} else if (j + 1 == aGrid.getSize())
+		{
+			left = sqrs[i][j - 1].getValue();
+			top = sqrs[i - 1][j].getValue();
+			right = -1;
+			bottom = sqrs[i + 1][j].getValue();
+		} else
+		{
+			left = sqrs[i][j - 1].getValue();
+			top = sqrs[i - 1][j].getValue();
+			right = sqrs[i][j + 1].getValue();
+			bottom = sqrs[i + 1][j].getValue();
+		}
+		coordList[0]=left;
+		coordList[1]=top;
+		coordList[2]=right;
+		coordList[3]=bottom;
+		return coordList;
+
+	}
 	@Override
 	public boolean onTouch(View view, MotionEvent event) {
 
@@ -89,6 +166,7 @@ public class FifteenSv extends SurfaceView implements View.OnTouchListener
 		int right=-1;
 		int top=-1;
 		int bottom=-1;
+
 
 		if(event.getActionMasked()==MotionEvent.ACTION_DOWN){
 			float xPressed = event.getX();
@@ -104,62 +182,11 @@ public class FifteenSv extends SurfaceView implements View.OnTouchListener
 					if(xPressed> xMin && xPressed<xMax && yPressed>yMin && yPressed<yMax ){
 
 
-						if(i-1<0 && j-1<0){
-							left=-1;
-							top=-1;
-							right=sqrs[i][j+1].getValue();
-							bottom=sqrs[i+1][j].getValue();
-						}
-						else if(i-1<0 && j+1==aGrid.getSize()){
-							left=sqrs[i][j-1].getValue();
-							top = -1;
-							right=-1;
-							bottom=sqrs[i+1][j].getValue();
-						}
-						else if(i+1==aGrid.getSize() && j+1==aGrid.getSize()){
-							left=sqrs[i][j-1].getValue();
-							top = sqrs[i-1][j].getValue();
-							right=-1;
-							bottom = -1;
-						}
-						else if(i+1==aGrid.getSize()&&j-1<0){
-							left=-1;
-							top = sqrs[i-1][j].getValue();
-							right=sqrs[i][j+1].getValue();
-							bottom=-1;
-						}
-						else if(i-1<0){
-							left=sqrs[i][j-1].getValue();
-							top = -1;
-							right=sqrs[i][j+1].getValue();
-							bottom=sqrs[i+1][j].getValue();
-						}
-						else if(j-1<0){
-							left = -1;
-							top = sqrs[i-1][j].getValue();
-							right=sqrs[i][j+1].getValue();
-							bottom=sqrs[i+1][j].getValue();
-						}
-						else if(i+1==aGrid.getSize()){
-							left=sqrs[i][j-1].getValue();
-							top = sqrs[i-1][j].getValue();
-							right=sqrs[i][j+1].getValue();
-							bottom = -1;
-						}
-						else if(j+1 == aGrid.getSize()){
-							left=sqrs[i][j-1].getValue();
-							top = sqrs[i-1][j].getValue();
-							right = -1;
-							bottom=sqrs[i+1][j].getValue();
-						}
-
-						else{
-							left=sqrs[i][j-1].getValue();
-							top = sqrs[i-1][j].getValue();
-							right=sqrs[i][j+1].getValue();
-							bottom=sqrs[i+1][j].getValue();
-
-						}
+						int[] coordinates= getCoordinates(i,j);
+						left=coordinates[0];
+						top = coordinates[1];
+						right = coordinates[2];
+						bottom = coordinates[3];
 
 
 						if(left==0){
@@ -189,8 +216,8 @@ public class FifteenSv extends SurfaceView implements View.OnTouchListener
 
 		}
 		checkIfFinished(sqrs,aGrid.getSize());
-		for(int i = 0; i<4;i++){
-			for(int j = 0;j<4;j++){
+		for(int i = 0; i<aGrid.getSize();i++){
+			for(int j = 0;j<aGrid.getSize();j++){
 				Log.d("the grid", "position " + i +", "+j+"has value"+ sqrs[i][j].getValue());
 			}
 		}

@@ -49,8 +49,8 @@ public class Grid {
 
 	public void shuffle(){
 
-		int n = 3;
-		int y =3;
+		int n = getSize()-1;
+		int y =getSize()-1;
 		Random rand = new Random();
 		for(int i = 0; i<getSize();i++){
 			for(int j =0;j<getSize();j++){
