@@ -1,12 +1,20 @@
 package com.example.fifteen_olsson22;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
+
+/**
+ * @Author Fredrik Olsson
+ * Date: 30 October 2019
+ *
+ * I chose to implement the grow shrink feature
+ * using a seekbar to set the size of the grid.
+ * This feature is implemented using the setGridSize()-method
+ * and the onProgressChanged()-method in the FifteenSV-class
+ *
+ */
 
 public class MainActivity extends AppCompatActivity
 {

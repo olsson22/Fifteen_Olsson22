@@ -5,6 +5,8 @@ package com.example.fifteen_olsson22;
  * @Author Fredrik Olsson
  * This class represents a Square containing a value
  * used for building the grid of Fifteen
+ *
+ * Date: 30 October 2019
  */
 
 

@@ -18,10 +18,13 @@ import java.util.ArrayList;
  * This class represents a game of Fifteen on a specific
  * Context and AttributeSet
  *
+ * Date: 30 October 2019
+ *
  *
  */
 
-public class FifteenSv extends SurfaceView implements View.OnTouchListener, View.OnClickListener, SeekBar.OnSeekBarChangeListener {
+public class FifteenSv extends SurfaceView implements View.OnTouchListener,
+		View.OnClickListener, SeekBar.OnSeekBarChangeListener {
 
 
 	private Paint paint = new Paint();
@@ -71,6 +74,7 @@ public class FifteenSv extends SurfaceView implements View.OnTouchListener, View
 		for(int i = 0;i<aGrid.getSize();i++) {
 			for (int j = 0; j < aGrid.getSize(); j++) {
 				paint.setColor(Color.RED);
+
 				int left = squares[i][j].getX();
 				int top= squares[i][j].getY();
 				int right = squares[i][j].getX() + squares[i][j].getSide();
@@ -78,13 +82,17 @@ public class FifteenSv extends SurfaceView implements View.OnTouchListener, View
 
 				canvas.drawRect(left, top,right , bottom, paint);
 				paint.setColor(Color.BLACK);
+
 				left = squares[i][j].getX()+1;
 				top= squares[i][j].getY()+1;
 				right = squares[i][j].getX() + squares[i][j].getSide()-1;
 				bottom = squares[i][j].getY() + squares[i][j].getSide()-1;
+
 				canvas.drawRect(left, top, right, bottom, paint);
+
 				paint.setColor(Color.RED);
 				paint.setTextSize(30);
+
 				int value = squares[i][j].getValue();
 				int x = squares[i][j].getX() + squares[i][j].getSide() / 2;
 				int y = squares[i][j].getY() + squares[i][j].getSide() / 2;

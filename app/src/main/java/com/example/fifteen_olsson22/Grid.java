@@ -6,8 +6,9 @@ import java.util.Random;
 
 /**
  * @Author Fredrik Olsson
+ * Date: 30 October 2019
  *
- * This class creates a grid of squares, to represent the game of Fifteen
+ * This class creates a grid of square objects, to represent the game of Fifteen
  */
 public class Grid {
 
