@@ -14,6 +14,8 @@ import android.widget.SeekBar;
  * This feature is implemented using the setGridSize()-method
  * and the onProgressChanged()-method in the FifteenSV-class
  *
+ * comments out line 51 in the Grid-class to test the functionality of my
+ * checkIfFinished()-method.
  */
 
 public class MainActivity extends AppCompatActivity
